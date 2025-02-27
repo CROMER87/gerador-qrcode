@@ -1,0 +1,31 @@
+.header{
+  display: flex;
+  flex-direction: row;;
+  width: 99vw;
+  height: 15vh;
+  align-items: center;
+  background: #ffffff;
+  color: hwb(0 4% 96%);
+  border: 1px solid #000000;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000000;
+}
+
+.logo{
+  display: flex;
+  border-radius: 50px;
+  width: 100px;
+  height: 90px;
+  margin-left: 10px;
+
+}
+
+.h1{
+  display: flex;
+  font-size: 2em;
+  margin-left: 15px;
+  font-family: 'Code';
+}
+
+
+

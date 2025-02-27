@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="box">
+    <form class="form" (submit)="onSubmit()">
+      <textarea
+        id="message"
+        name="message"
+        class="form-control"
+        [(ngModel)]="text"
+        placeholder="Ensira seu texto aqui"
+      ></textarea>
+      <button type="submit" class="btn btn-primary">Gerar QR Code</button>
+    </form>
+    <div class="qrcode">
+      <img *ngIf="qrcode" [src]="qrcode" alt="QR Code" />
+      <button
+        style="margin-left: 60px"
+        *ngIf="qrcode"
+        class="btn btn-primary"
+        (click)="salvarQrCode()"
+      >
+        Salvar QR Code
+      </button>
+    </div>
+  </div>
+</div>
