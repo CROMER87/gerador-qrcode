@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import * as QRCode from 'qrcode';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,9 +11,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './box.component.html',
   styleUrl: './box.component.css'
 
-
 })
 export class BoxComponent {
+    constructor(private router: Router) {}
 text!: string;
 qrcode!: string;
 
@@ -21,9 +22,6 @@ async onSubmit(){
   console.log(this.text);
   this.text = '';
 }
-
-
-
 
   async generateQrCode(text: string): Promise<string> {
     try {
@@ -44,6 +42,10 @@ async onSubmit(){
     } else {
       alert('Por favor, gere um QR Code primeiro.');
     }
+  }
+
+    voltarHome() {
+    this.router.navigate(['']);
   }
 }
 
