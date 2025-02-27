@@ -15,7 +15,7 @@ export async function netlifyCommonEngineHandler(request: Request, context: any)
 }
 
 // If you want to use "AppEngine" instead - your server.ts file should contain following:
-
+/*
 import { AngularAppEngine, createRequestHandler } from "@angular/ssr";
 import { getContext } from "@netlify/angular-runtime/context";
 
@@ -38,4 +38,4 @@ export async function netlifyAppEngineHandler(request: Request): Promise<Respons
 /**
  * The request handler used by the Angular CLI (dev-server and during build).
  */
-export const reqHandler = createRequestHandler(netlifyAppEngineHandler);
+//export const reqHandler = createRequestHandler(netlifyAppEngineHandler); */
