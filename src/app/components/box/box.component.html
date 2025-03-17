@@ -4,9 +4,6 @@
 </button>
 
 <div class="caixa">
-  <!--   <button class="btn btn-outline-primary" (click)="voltarHome()">
-    <span class="mr-2"></span> Voltar
-  </button> -->
   <form class="form" (submit)="onSubmit()">
     <textarea
       id="message"
@@ -15,8 +12,6 @@
       [(ngModel)]="text"
       placeholder="Ensira seu texto aqui"
     ></textarea>
-    <!--     <button type="submit" class="btn btn-primary">Gerar QR Code</button>
- -->
     <button
       type="submit"
       mat-raised-button
@@ -24,7 +19,7 @@
       class="botao-qr-code"
     >
       <mat-icon>qr_code</mat-icon>
-      Gerar QR Code
+      Gerar
     </button>
   </form>
 
