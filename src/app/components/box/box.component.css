@@ -4,13 +4,14 @@
   flex-direction: row;
   justify-content: flex-end;
   margin: 80px;
-  width: 900px;
-  height: 600px;
+  width: 80vw;
+  height: 80vh;
   margin-right: 10px;
   border: 1px solid #000000;
   border-radius: 10px;
   box-shadow: 0 0 10px #000000;
   margin-bottom: 5px;
+  margin-left: 30px;
 }
 
 
@@ -21,11 +22,9 @@
 }
 
 .form-control{
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-  width: 400px;
-  height: 200px;
+  margin-bottom: 10px;
+/*   width: 25vw;
+  height: 8vh; */
   border: 1px solid #000000;
   border-radius: 10px;
   box-shadow: 0 0 10px #000000;
@@ -34,19 +33,66 @@
 .form{
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width:30vw;
 
 }
 
 .btn{
-  margin: 10px;
-  width: 200px;
+  width: 16vw;
+    margin-bottom: 10px;
+
 }
 .qrcode{
   display: flex;
   flex-direction: column;
-  margin: 10px;
-  width: 500px;
-  height:200px;
+  width: 300px;
+  height:300px;
+  margin: 20px;
+
+}
+
+button[mat-button] {
+  color: #3f51b5;
+
+
+  margin:30px;
+  margin-left: 50px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+button[mat-button] mat-icon {
+  margin-right: 5px;
+}
+
+button[mat-button]:hover {
+  background-color: #7a8be9;
+  color: #f5f6f8;
+}
+
+.botao-download {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .botao-download {
+    font-size: 14px;
+    /* Diminui o tamanho da fonte em telas menores */
+    padding: 8px 16px;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+  .botao-download {
+    font-size: 12px;
+    /* Ainda menor para dispositivos muito pequenos */
+    padding: 6px 12px;
+  }
 
 }

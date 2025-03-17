@@ -3,11 +3,13 @@ import { FormsModule } from '@angular/forms';
 import * as QRCode from 'qrcode';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-box',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule,  MatButtonModule,
+    MatIconModule],
   templateUrl: './box.component.html',
   styleUrl: './box.component.css'
 
