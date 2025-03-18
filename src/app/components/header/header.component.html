@@ -1,6 +1,38 @@
-<div >
-  <div class="header" >
-    <img class="logo" src="assets/img/logo.png">
-    <h1 class="h1">Gerador de <br> QR Code</h1>
+<header class="header">
+  <div class="header-content">
+    <div class="logo-container">
+      <img class="logo" src="assets/img/logo.png" alt="Logo QR Code">
+      <div class="brand">
+        <h1>Gerador de QR Code</h1>
+        <span class="tagline">Crie seus QR codes de forma rápida e gratuita</span>
+      </div>
+    </div>
+    
+    <nav class="nav-menu">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon>home</mat-icon>
+        Início
+      </a>
+      <a routerLink="/gerar-qrcode" routerLinkActive="active">
+        <mat-icon>qr_code</mat-icon>
+        Gerador QR Code
+      </a>
+
+    </nav>
+
+    <button mat-icon-button class="menu-button" (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
   </div>
-</div>
+
+  <div class="mobile-menu" [class.show]="isMenuOpen">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">
+      <mat-icon>home</mat-icon>
+      Início
+    </a>
+    <a routerLink="/gerar-qrcode" routerLinkActive="active" (click)="closeMenu()">
+      <mat-icon>qr_code</mat-icon>
+      Gerar QR Code
+    </a>
+  </div>
+</header>

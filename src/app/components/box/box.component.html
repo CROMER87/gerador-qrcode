@@ -1,39 +1,44 @@
-<button mat-button (click)="voltarHome()">
-  <mat-icon>arrow_back</mat-icon>
-  Voltar
-</button>
-
-<div class="caixa">
-  <form class="form" (submit)="onSubmit()">
-    <textarea
-      id="message"
-      name="message"
-      class="form-control"
-      [(ngModel)]="text"
-      placeholder="Ensira seu texto aqui"
-    ></textarea>
-    <button
-      type="submit"
-      mat-raised-button
-      color="accent"
-      class="botao-qr-code"
-    >
-      <mat-icon>qr_code</mat-icon>
-      Gerar
-    </button>
-  </form>
-
-  <div class="qrcode">
-    <img *ngIf="qrcode" [src]="qrcode" alt="QR Code" />
-  </div>
-  <button
-    mat-raised-button
-    color="primary"
-    class="botao-download"
-    *ngIf="qrcode"
-    class="btn btn-primary"
-    (click)="salvarQrCode()"
-  >
-    <mat-icon>download</mat-icon>
+<div class="container">
+  <button mat-button class="back-button" (click)="voltarHome()">
+    <mat-icon>arrow_back</mat-icon>
+    Voltar
   </button>
+
+  <div class="content-wrapper">
+    <div class="input-section">
+      <form class="form" (submit)="onSubmit()">
+        <textarea
+          id="message"
+          name="message"
+          class="form-control"
+          [(ngModel)]="text"
+          placeholder="Insira seu texto aqui"
+        ></textarea>
+        <button
+          type="submit"
+          mat-raised-button
+          color="accent"
+          class="generate-button"
+        >
+          <mat-icon>qr_code</mat-icon>
+          Gerar QR Code
+        </button>
+      </form>
+    </div>
+
+    <div class="output-section" *ngIf="qrcode">
+      <div class="qrcode-container">
+        <img [src]="qrcode" alt="QR Code" />
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        class="download-button"
+        (click)="salvarQrCode()"
+      >
+        <mat-icon>download</mat-icon>
+        Baixar QR Code
+      </button>
+    </div>
+  </div>
 </div>

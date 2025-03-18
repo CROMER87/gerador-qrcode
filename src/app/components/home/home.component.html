@@ -1,33 +1,58 @@
-<div class="container">
-  <h1>Gerador de QR Code Grátis e Fácil</h1>
-  <p>
-    Transforme qualquer texto em um QR code de maneira rápida e gratuita! Seja
-    para compartilhar links, mensagens, ou qualquer outra informação, nossa
-    ferramenta online facilita a criação de QR codes em poucos passos.
-  </p>
-  <h2>Como Funciona:</h2>
-  <ul>
-    <li>
-      Digite seu texto: Insira o texto que você deseja converter em QR code na
-      caixa de texto.
-    </li>
-    <li>
-      Clique no botão: Aperte o botão "Gerar QR Code" para criar
-      instantaneamente o seu QR code.
-    </li>
-    <li>
-      Visualize e baixe: Veja a prévia do QR code gerado e, se estiver
-      satisfeito, faça o download para uso imediato.
-    </li>
-  </ul>
-  <h2>Vantagens:</h2>
-  <ul>
-    <li>
-      100% Gratuito: Nossa ferramenta é completamente gratuita, sem limites de
-      uso.
-    </li>
-    <li>Rápido e Simples: Geração de QR codes em apenas alguns cliques.</li>
-    <li>Versátil: Ideal para links, mensagens, contatos e muito mais.</li>
-  </ul>
-  <a (click)="abrirBox()" class="btn">Experimente Agora</a>
+<div class="home-container">
+  <div class="hero-section">
+    <h1>Gerador de QR Code Grátis e Fácil</h1>
+    <p class="hero-text">
+      Transforme qualquer texto em um QR code de maneira rápida e gratuita! Seja
+      para compartilhar links, mensagens, ou qualquer outra informação, nossa
+      ferramenta online facilita a criação de QR codes em poucos passos.
+    </p>
+    <button mat-raised-button color="primary" class="cta-button" (click)="abrirBox()">
+      <mat-icon>qr_code</mat-icon>
+      Começar Agora
+    </button>
+  </div>
+
+  <div class="features-section">
+    <h2 class="section-title">Como Funciona</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <mat-icon class="feature-icon">edit</mat-icon>
+        <h3>Digite seu texto</h3>
+        <p>Insira o texto que você deseja converter em QR code na caixa de texto.</p>
+      </div>
+
+      <div class="feature-card">
+        <mat-icon class="feature-icon">qr_code</mat-icon>
+        <h3>Gere o QR Code</h3>
+        <p>Aperte o botão "Gerar QR Code" para criar instantaneamente o seu QR code.</p>
+      </div>
+
+      <div class="feature-card">
+        <mat-icon class="feature-icon">download</mat-icon>
+        <h3>Baixe e use</h3>
+        <p>Veja a prévia do QR code gerado e faça o download para uso imediato.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="benefits-section">
+    <h2>Vantagens</h2>
+    <div class="benefits-grid">
+      <div class="benefit-item">
+        <mat-icon class="benefit-icon">free_breakfast</mat-icon>
+        <h3>100% Gratuito</h3>
+        <p>Nossa ferramenta é completamente gratuita, sem limites de uso.</p>
+      </div>
+      <div class="benefit-item">
+        <mat-icon class="benefit-icon">speed</mat-icon>
+        <h3>Rápido e Simples</h3>
+        <p>Geração de QR codes em apenas alguns cliques.</p>
+      </div>
+      <div class="benefit-item">
+        <mat-icon class="benefit-icon">extension</mat-icon>
+        <h3>Versátil</h3>
+        <p>Ideal para links, mensagens, contatos e muito mais.</p>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,31 +1,176 @@
-.header{
+.header {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
   display: flex;
-  flex-direction: row;;
-  width: 99vw;
-  height: 15vh;
+  justify-content: space-between;
   align-items: center;
-  background: #ffffff;
-  color: hwb(0 4% 96%);
-  border: 1px solid #000000;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #000000;
 }
 
-.logo{
+.logo-container {
   display: flex;
-  border-radius: 50px;
-  width: 100px;
-  height: 90px;
-  margin-left: 10px;
-
+  align-items: center;
+  gap: 1rem;
 }
 
-.h1{
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.brand {
   display: flex;
-  font-size: 2em;
-  margin-left: 15px;
-  font-family: 'Code';
+  flex-direction: column;
 }
 
+.brand h1 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin: 0;
+  font-weight: 700;
+}
 
+.tagline {
+  font-size: 0.9rem;
+  color: #666;
+}
 
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-menu a:hover {
+  background-color: #f5f5f5;
+  color: #3f51b5;
+}
+
+.nav-menu a.active {
+  color: #3f51b5;
+  background-color: #e3f2fd;
+}
+
+.nav-menu mat-icon {
+  font-size: 1.2rem;
+}
+
+.menu-button {
+  display: none;
+}
+
+.github-link {
+  background-color: #24292e;
+  color: white !important;
+}
+
+.github-link:hover {
+  background-color: #2f363d !important;
+  color: white !important;
+}
+
+.mobile-menu {
+  display: none;
+  background: white;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+  color: #2c3e50;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu a:hover {
+  background-color: #f5f5f5;
+  color: #3f51b5;
+}
+
+.mobile-menu a.active {
+  color: #3f51b5;
+  background-color: #e3f2fd;
+}
+
+.mobile-menu mat-icon {
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .header-content {
+    padding: 1rem;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+
+  .menu-button {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: none;
+  }
+
+  .mobile-menu.show {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand h1 {
+    font-size: 1.2rem;
+  }
+
+  .tagline {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header-content {
+    padding: 0.8rem;
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand h1 {
+    font-size: 1.1rem;
+  }
+
+  .tagline {
+    font-size: 0.7rem;
+  }
+}
