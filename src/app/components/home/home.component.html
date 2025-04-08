@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="home-container">
   <div class="hero-section">
     <h1>Gerador de QR Code Grátis e Fácil</h1>
@@ -6,7 +7,12 @@
       para compartilhar links, mensagens, ou qualquer outra informação, nossa
       ferramenta online facilita a criação de QR codes em poucos passos.
     </p>
-    <button mat-raised-button color="primary" class="cta-button" (click)="abrirBox()">
+    <button
+      mat-raised-button
+      color="primary"
+      class="cta-button"
+      (click)="abrirBox()"
+    >
       <mat-icon>qr_code</mat-icon>
       Começar Agora
     </button>
@@ -18,19 +24,26 @@
       <div class="feature-card">
         <mat-icon class="feature-icon">edit</mat-icon>
         <h3>Digite seu texto</h3>
-        <p>Insira o texto que você deseja converter em QR code na caixa de texto.</p>
+        <p>
+          Insira o texto que você deseja converter em QR code na caixa de texto.
+        </p>
       </div>
 
       <div class="feature-card">
         <mat-icon class="feature-icon">qr_code</mat-icon>
         <h3>Gere o QR Code</h3>
-        <p>Aperte o botão "Gerar QR Code" para criar instantaneamente o seu QR code.</p>
+        <p>
+          Aperte o botão "Gerar QR Code" para criar instantaneamente o seu QR
+          code.
+        </p>
       </div>
 
       <div class="feature-card">
         <mat-icon class="feature-icon">download</mat-icon>
         <h3>Baixe e use</h3>
-        <p>Veja a prévia do QR code gerado e faça o download para uso imediato.</p>
+        <p>
+          Veja a prévia do QR code gerado e faça o download para uso imediato.
+        </p>
       </div>
     </div>
   </div>

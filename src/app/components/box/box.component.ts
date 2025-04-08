@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-box',
   imports: [FormsModule, CommonModule,  MatButtonModule,
-    MatIconModule],
+    MatIconModule, HeaderComponent],
   templateUrl: './box.component.html',
   styleUrl: './box.component.css'
 
