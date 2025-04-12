@@ -14,3 +14,6 @@ export async function netlifyCommonEngineHandler(request: Request, context: any)
   return await render(commonEngine);
 }
 
+// Export the handler for Netlify
+export const handler = netlifyCommonEngineHandler;
+
