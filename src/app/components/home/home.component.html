@@ -1,5 +1,22 @@
 <app-header></app-header>
 <div class="home-container">
+  <div class="content">
+    <h1>Gerador de QR Code</h1>
+    <p>Escolha uma opção para gerar seu QR Code:</p>
+    
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="abrirBox()">
+        <mat-icon>qr_code</mat-icon>
+        Gerar QR Code Simples
+      </button>
+      
+      <button mat-raised-button color="accent" (click)="abrirQrGenerator()">
+        <mat-icon>qr_code_2</mat-icon>
+        Gerar QR Code Avançado
+      </button>
+    </div>
+  </div>
+
   <div class="hero-section">
     <h1>Gerador de QR Code Grátis e Fácil</h1>
     <p class="hero-text">

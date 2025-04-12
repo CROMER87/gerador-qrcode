@@ -18,4 +18,8 @@ export class HomeComponent {
   abrirBox() {
     this.router.navigate(['/gerar-qrcode']);
   }
+
+  abrirQrGenerator() {
+    this.router.navigate(['/qr-generator']);
+  }
 }
