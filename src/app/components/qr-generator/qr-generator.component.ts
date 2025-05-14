@@ -60,11 +60,11 @@ interface SocialMedia {
             <span>Texto</span>
           </div>
           <div class="qr-type-card" [class.selected]="selectedType === 'whatsapp'" (click)="selectType('whatsapp')">
-            <mat-icon>whatsapp</mat-icon>
+            <img src="assets/img/whatsapp.avif" alt="WhatsApp" class="qr-type-icon">
             <span>WhatsApp</span>
           </div>
           <div class="qr-type-card" [class.selected]="selectedType === 'vcard'" (click)="selectType('vcard')">
-            <mat-icon>contact_card</mat-icon>
+            <mat-icon>badge</mat-icon>
             <span>vCard</span>
           </div>
           <div class="qr-type-card" [class.selected]="selectedType === 'url'" (click)="selectType('url')">
@@ -283,8 +283,13 @@ interface SocialMedia {
           </div>
           <div *ngIf="selectedType === 'whatsapp'" class="whatsapp-info">
             <h3>WhatsApp</h3>
-            <p><mat-icon>phone</mat-icon> {{ whatsappNumber }}</p>
-            <p *ngIf="whatsappMessage"><mat-icon>message</mat-icon> {{ whatsappMessage }}</p>
+            <div class="social-media-item">
+              <img src="assets/img/whatsapp.avif" alt="WhatsApp" class="social-media-icon">
+              <div class="social-media-info">
+                <p><mat-icon>phone</mat-icon> {{ whatsappNumber }}</p>
+                <p *ngIf="whatsappMessage"><mat-icon>message</mat-icon> {{ whatsappMessage }}</p>
+              </div>
+            </div>
           </div>
           <div *ngIf="selectedType === 'wifi'" class="wifi-info">
             <h3>Wi-Fi</h3>
@@ -362,36 +367,35 @@ interface SocialMedia {
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background-color: #f5f5f5;
+      background: #f5f5f5;
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-align: center;
     }
 
     .qr-type-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      background-color: #e0e0e0;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     }
 
     .qr-type-card.selected {
-      background-color: #e3f2fd;
+      background: #e3f2fd;
       border: 2px solid #2196f3;
     }
 
     .qr-type-card mat-icon {
-      font-size: 36px;
-      width: 36px;
-      height: 36px;
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
       margin-bottom: 10px;
       color: #333;
     }
 
     .qr-type-card span {
       font-size: 14px;
-      font-weight: 500;
       color: #333;
+      font-weight: 500;
     }
 
     .qr-form-container {
@@ -553,6 +557,18 @@ interface SocialMedia {
     }
     .link-container input {
       flex: 1;
+    }
+
+    .social-media-icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .qr-type-icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
     }
 
     @media (max-width: 600px) {

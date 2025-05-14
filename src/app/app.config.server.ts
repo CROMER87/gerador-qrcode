@@ -7,7 +7,16 @@ import { serverRoutes } from './app.routes.server';
 const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(),
-    provideServerRouting(serverRoutes)
+    provideServerRouting(serverRoutes),
+    {
+      provide: 'ROUTES',
+      useValue: [
+        {
+          path: 'checkout/:id',
+          renderMode: 'dynamic'
+        }
+      ]
+    }
   ]
 };
 
