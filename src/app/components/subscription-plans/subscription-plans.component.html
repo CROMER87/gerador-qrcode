@@ -1,0 +1,36 @@
+<div class="plans-container">
+  <h2>Escolha seu plano</h2>
+  <p class="subtitle">Selecione o plano ideal para suas necessidades</p>
+
+  <div class="plans-grid">
+    <mat-card *ngFor="let plan of plans" [class.popular]="plan.isPopular">
+      <mat-card-header>
+        <mat-card-title>{{ plan.name }}</mat-card-title>
+        <mat-card-subtitle>{{ plan.description }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="price">
+          <span class="currency">R$</span>
+          <span class="amount">{{ plan.price }}</span>
+          <span class="period">/mês</span>
+        </div>
+
+        <ul class="features">
+          <li *ngFor="let feature of plan.features">
+            <mat-icon>check</mat-icon>
+            {{ feature }}
+          </li>
+        </ul>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button 
+                [color]="plan.isPopular ? 'primary' : 'accent'"
+                (click)="selectPlan(plan)">
+          {{ plan.price === 0 ? 'Começar Grátis' : 'Assinar Agora' }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -2,18 +2,38 @@
 <div class="home-container">
   <div class="content">
     <h1>Gerador de QR Code</h1>
-    <p>Escolha uma opção para gerar seu QR Code:</p>
+    <p class="subtitle">Crie QR Codes personalizados para suas necessidades</p>
     
-    <div class="button-container">
-      <button mat-raised-button color="primary" (click)="abrirBox()">
-        <mat-icon>qr_code</mat-icon>
-        Gerar QR Code Simples
-      </button>
-      
-      <button mat-raised-button color="accent" (click)="abrirQrGenerator()">
-        <mat-icon>qr_code_2</mat-icon>
-        Gerar QR Code Avançado
-      </button>
+    <div class="actions-grid">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>QR Code Simples</mat-card-title>
+          <mat-card-subtitle>Gere QR Codes básicos</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Ideal para links, textos e informações simples</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" routerLink="/gerar">
+            Gerar QR Code
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>QR Code Avançado</mat-card-title>
+          <mat-card-subtitle>Recursos premium</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Acesse recursos avançados como vCard, WhatsApp e mais</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="accent" routerLink="/plans">
+            Ver Planos
+          </button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 

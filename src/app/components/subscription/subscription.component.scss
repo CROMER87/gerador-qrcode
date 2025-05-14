@@ -1,0 +1,159 @@
+.subscription-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: rgba(0, 0, 0, 0.87);
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        color: rgba(0, 0, 0, 0.6);
+        margin-bottom: 3rem;
+    }
+
+    .plans-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+
+        mat-card {
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            }
+
+            &.recommended {
+                border: 2px solid #2196f3;
+                position: relative;
+
+                &::before {
+                    content: 'Recomendado';
+                    position: absolute;
+                    top: -12px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #2196f3;
+                    color: white;
+                    padding: 4px 12px;
+                    border-radius: 12px;
+                    font-size: 0.8rem;
+                }
+            }
+
+            mat-card-header {
+                margin-bottom: 1.5rem;
+
+                mat-card-title {
+                    font-size: 1.5rem;
+                    margin-bottom: 0.5rem;
+                }
+
+                mat-card-subtitle {
+                    color: #2196f3;
+                    font-weight: 500;
+                }
+            }
+
+            .price {
+                text-align: center;
+                margin: 2rem 0;
+
+                .currency {
+                    font-size: 1.5rem;
+                    font-weight: 500;
+                    vertical-align: top;
+                    margin-right: 0.25rem;
+                }
+
+                .amount {
+                    font-size: 3rem;
+                    font-weight: 700;
+                }
+
+                .period {
+                    font-size: 1rem;
+                    color: rgba(0, 0, 0, 0.6);
+                    margin-left: 0.25rem;
+                }
+            }
+
+            .features {
+                list-style: none;
+                padding: 0;
+                margin: 2rem 0;
+                text-align: left;
+
+                li {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 1rem;
+                    color: rgba(0, 0, 0, 0.87);
+
+                    mat-icon {
+                        color: #4caf50;
+                        margin-right: 0.5rem;
+                    }
+                }
+            }
+
+            mat-card-actions {
+                display: flex;
+                justify-content: center;
+                padding: 1rem;
+
+                button {
+                    min-width: 200px;
+                }
+            }
+        }
+    }
+}
+
+.checkout-section {
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+
+    .checkout-button {
+        padding: 1rem 3rem;
+        font-size: 1.2rem;
+        min-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .subscription-container {
+        padding: 1rem;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+        }
+    }
+
+    .plans-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .checkout-section {
+        padding: 1rem;
+
+        .checkout-button {
+            width: 100%;
+            min-width: auto;
+        }
+    }
+}

@@ -1,0 +1,34 @@
+<div class="subscription-container">
+  <h1>Escolha seu plano</h1>
+  <p class="subtitle">Selecione o plano que melhor atende às suas necessidades</p>
+
+  <div class="plans-grid">
+    <mat-card *ngFor="let plan of plans" [class.recommended]="plan.recommended">
+      <mat-card-header>
+        <mat-card-title>{{ plan.name }}</mat-card-title>
+        <mat-card-subtitle *ngIf="plan.recommended">Recomendado</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="price">
+          <span class="currency">R$</span>
+          <span class="amount">{{ plan.price.toFixed(2) }}</span>
+          <span class="period">/mês</span>
+        </div>
+
+        <ul class="features">
+          <li *ngFor="let feature of plan.features">
+            <mat-icon>check</mat-icon>
+            {{ feature }}
+          </li>
+        </ul>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="selectPlan(plan.id)">
+          Selecionar plano
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div> 

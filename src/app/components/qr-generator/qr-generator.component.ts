@@ -306,6 +306,15 @@ interface SocialMedia {
           <button mat-raised-button color="accent" (click)="downloadQRCode()">Download</button>
           <button mat-raised-button color="primary" (click)="downloadQRCodeWithInfo()">Download com Informações</button>
         </div>
+        <div *ngIf="selectedType === 'social' && socialLink" class="social-link">
+          <h3>Link para sua página de redes sociais:</h3>
+          <div class="link-container">
+            <input matInput [value]="socialLink" readonly>
+            <button mat-icon-button (click)="copyLink()" matTooltip="Copiar link">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   `,
@@ -531,6 +540,21 @@ interface SocialMedia {
       margin-top: 10px;
     }
 
+    .social-link {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+    }
+    .link-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .link-container input {
+      flex: 1;
+    }
+
     @media (max-width: 600px) {
       .qr-type-grid {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -604,6 +628,8 @@ export class QrGeneratorComponent {
       light: '#FFFFFF'
     }
   };
+
+  socialLink: string = '';
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) platformId: Object) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -699,76 +725,94 @@ export class QrGeneratorComponent {
   }
 
   async generateQRCode() {
-    let content = '';
+    if (!this.isBrowser) return;
+
+    let qrData = '';
+    switch (this.selectedType) {
+      case 'text':
+        qrData = this.text;
+        break;
+      case 'whatsapp':
+        qrData = `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(this.whatsappMessage)}`;
+        break;
+      case 'vcard':
+        qrData = `BEGIN:VCARD\nVERSION:3.0\nFN:${this.vcardName}\nTEL:${this.vcardPhone}\nEMAIL:${this.vcardEmail}\nEND:VCARD`;
+        break;
+      case 'url':
+        qrData = this.url;
+        break;
+      case 'email':
+        qrData = `mailto:${this.emailAddress}?subject=${encodeURIComponent(this.emailSubject)}&body=${encodeURIComponent(this.emailBody)}`;
+        break;
+      case 'sms':
+        qrData = `smsto:${this.smsNumber}:${this.smsMessage}`;
+        break;
+      case 'wifi':
+        qrData = `WIFI:T:WPA;S:${this.wifiSSID};P:${this.wifiPassword};${this.wifiHidden ? 'H:true;' : ''};`;
+        break;
+      case 'geo':
+        qrData = `geo:${this.geoLatitude},${this.geoLongitude}`;
+        break;
+      case 'phone':
+        qrData = `tel:${this.phoneNumber}`;
+        break;
+      case 'social':
+        if (!this.socialName || this.socialMediaList.length === 0) {
+          alert('Por favor, preencha seu nome e adicione pelo menos uma rede social.');
+          return;
+        }
+
+        // Verificar se todas as redes sociais têm URLs válidas
+        const validSocials = this.socialMediaList.filter(social => social.url && social.url.trim() !== '');
+        if (validSocials.length === 0) {
+          alert('Por favor, adicione pelo menos uma URL válida para suas redes sociais.');
+          return;
+        }
+
+        const socialData = {
+          name: this.socialName,
+          photo: this.socialPhoto,
+          socials: validSocials
+        };
+
+        try {
+          const encodedData = encodeURIComponent(JSON.stringify(socialData));
+          const baseUrl = window.location.origin;
+          this.socialLink = `${baseUrl}/social?data=${encodedData}`;
+          qrData = this.socialLink;
+
+          // Limitar o tamanho dos dados para evitar problemas com QR codes muito grandes
+          if (qrData.length > 2048) {
+            console.warn('Dados muito grandes para o QR code, tentando reduzir...');
+            // Remover a foto se estiver presente para reduzir o tamanho
+            if (socialData.photo) {
+              socialData.photo = '';
+              const newEncodedData = encodeURIComponent(JSON.stringify(socialData));
+              this.socialLink = `${baseUrl}/social?data=${newEncodedData}`;
+              qrData = this.socialLink;
+            }
+          }
+        } catch (error) {
+          console.error('Erro ao preparar dados para QR code:', error);
+          alert('Erro ao preparar dados para o QR code. Por favor, tente novamente.');
+          return;
+        }
+        break;
+      default:
+        throw new Error(`Tipo de QR Code não suportado: ${this.selectedType}`);
+    }
 
     try {
-      switch (this.selectedType) {
-        case 'text':
-          content = this.text;
-          break;
-        case 'whatsapp':
-          content = `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(this.whatsappMessage)}`;
-          break;
-        case 'vcard':
-          content = `BEGIN:VCARD\nVERSION:3.0\nFN:${this.vcardName}\nTEL:${this.vcardPhone}\nEMAIL:${this.vcardEmail}\nEND:VCARD`;
-          break;
-        case 'url':
-          content = this.url;
-          break;
-        case 'email':
-          content = `mailto:${this.emailAddress}?subject=${encodeURIComponent(this.emailSubject)}&body=${encodeURIComponent(this.emailBody)}`;
-          break;
-        case 'sms':
-          content = `smsto:${this.smsNumber}:${this.smsMessage}`;
-          break;
-        case 'wifi':
-          content = `WIFI:T:WPA;S:${this.wifiSSID};P:${this.wifiPassword};${this.wifiHidden ? 'H:true;' : ''};`;
-          break;
-        case 'geo':
-          content = `geo:${this.geoLatitude},${this.geoLongitude}`;
-          break;
-        case 'phone':
-          content = `tel:${this.phoneNumber}`;
-          break;
-        case 'social':
-          this.socialMediaList.forEach(social => {
-            if (social.platform === 'custom' && (!social.customName || social.customName.trim() === '')) {
-              social.customName = 'Link Personalizado';
-            }
-          });
-
-          const socialData = {
-            name: this.socialName,
-            socials: this.socialMediaList.filter(social => social.url.trim() !== ''),
-            photo: this.socialPhoto
-          };
-
-          const socialId = `social_${new Date().getTime()}`;
-
-          if (this.isBrowser) {
-            localStorage.setItem(socialId, JSON.stringify(socialData));
-          }
-
-          content = `${window.location.origin}/social?id=${socialId}`;
-          console.log('Link para a página de redes sociais:', content);
-          break;
-        default:
-          throw new Error(`Tipo de QR Code não suportado: ${this.selectedType}`);
-      }
-
-      if (!content || content.trim() === '') {
-        throw new Error('O conteúdo do QR Code não pode estar vazio');
-      }
-
-      console.log('Conteúdo do QR Code:', content);
-
       this.updateQROptions();
-      this.qrCodeUrl = await QRCode.toDataURL(content, this.qrOptions);
+      this.qrCodeUrl = await QRCode.toDataURL(qrData, this.qrOptions);
       console.log('QR Code gerado com sucesso');
 
-      const isValid = await this.verifyQRCode();
-      if (!isValid) {
-        throw new Error('O QR Code foi gerado, mas não pôde ser carregado corretamente');
+      // Verificar o QR code apenas se não for do tipo social
+      if (this.selectedType !== 'social') {
+        const isValid = await this.verifyQRCode();
+        if (!isValid) {
+          throw new Error('O QR Code foi gerado, mas não pôde ser carregado corretamente');
+        }
       }
     } catch (error) {
       console.error('Erro ao gerar QR Code:', error);
@@ -1262,6 +1306,17 @@ export class QrGeneratorComponent {
     } catch (error) {
       console.error('Erro ao verificar QR Code:', error);
       return false;
+    }
+  }
+
+  copyLink() {
+    if (this.socialLink) {
+      navigator.clipboard.writeText(this.socialLink).then(() => {
+        alert('Link copiado para a área de transferência!');
+      }).catch(err => {
+        console.error('Erro ao copiar o link:', err);
+        alert('Erro ao copiar o link. Por favor, tente novamente.');
+      });
     }
   }
 } 

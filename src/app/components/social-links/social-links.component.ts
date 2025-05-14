@@ -68,13 +68,18 @@ interface SocialData {
     </div>
   `,
   styles: [`
+    :host {
+      display: block;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f6f9fc 0%, #e9f2f9 100%);
+    }
+
     .social-links-container {
       max-width: 600px;
       margin: 0 auto;
       padding: 20px;
       font-family: 'Roboto', sans-serif;
       min-height: 100vh;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     }
 
     .profile-header {
@@ -82,38 +87,50 @@ interface SocialData {
       flex-direction: column;
       align-items: center;
       margin-bottom: 30px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 16px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
     }
 
     .profile-avatar {
-      width: 120px;
-      height: 120px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       background-color: #f0f0f0;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       background-size: cover;
       background-position: center;
-      border: 4px solid white;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border: 4px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-avatar:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
     }
 
     .profile-avatar mat-icon {
-      font-size: 60px;
-      width: 60px;
-      height: 60px;
+      font-size: 70px;
+      width: 70px;
+      height: 70px;
       color: #757575;
     }
 
     h1 {
-      font-size: 28px;
-      font-weight: 500;
-      color: #333;
+      font-size: 32px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin: 0;
       text-align: center;
     }
@@ -121,42 +138,64 @@ interface SocialData {
     .social-links {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 20px;
     }
 
     .social-card {
-      border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.9);
-      border: none;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+      transition: all 0.4s ease;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      overflow: hidden;
     }
 
     .social-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15);
     }
 
     .social-card mat-card-content {
       display: flex;
       align-items: center;
-      padding: 20px;
+      padding: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-card mat-card-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+      pointer-events: none;
     }
 
     .social-icon {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 15px;
+      margin-right: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .social-card:hover .social-icon {
+      transform: scale(1.1);
     }
 
     .social-icon mat-icon {
-      font-size: 24px;
-      width: 24px;
-      height: 24px;
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
       color: white;
     }
 
@@ -165,10 +204,13 @@ interface SocialData {
     }
 
     .social-info h2 {
-      font-size: 18px;
-      font-weight: 500;
-      margin: 0 0 5px 0;
-      color: #333;
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+      background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .social-info p {
@@ -178,36 +220,44 @@ interface SocialData {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 200px;
+      max-width: 250px;
     }
 
     .no-links {
       text-align: center;
-      padding: 30px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
+      padding: 40px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+      border-radius: 16px;
       color: #666;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
     }
 
     .footer {
-      margin-top: 40px;
+      margin-top: 50px;
       text-align: center;
       color: #666;
       font-size: 14px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
     }
 
     .footer p {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #2c3e50;
     }
 
-    /* Cores específicas para cada rede social */
+    /* Cores específicas para cada rede social com degrades */
     .social-card-facebook .social-icon {
-      background: #1877f2;
+      background: linear-gradient(135deg, #1877f2 0%, #0d5ab9 100%);
     }
 
     .social-card-instagram .social-icon {
@@ -215,82 +265,84 @@ interface SocialData {
     }
 
     .social-card-twitter .social-icon {
-      background: #1da1f2;
+      background: linear-gradient(135deg, #1da1f2 0%, #0d8ecf 100%);
     }
 
     .social-card-tiktok .social-icon {
-      background: #000000;
+      background: linear-gradient(135deg, #000000 0%, #333333 100%);
     }
 
     .social-card-youtube .social-icon {
-      background: #ff0000;
+      background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
     }
 
     .social-card-linkedin .social-icon {
-      background: #0077b5;
+      background: linear-gradient(135deg, #0077b5 0%, #005582 100%);
     }
 
     .social-card-pinterest .social-icon {
-      background: #e60023;
+      background: linear-gradient(135deg, #e60023 0%, #b3001c 100%);
     }
 
     .social-card-snapchat .social-icon {
-      background: #fffc00;
+      background: linear-gradient(135deg, #fffc00 0%, #e6e300 100%);
     }
 
     .social-card-reddit .social-icon {
-      background: #ff4500;
+      background: linear-gradient(135deg, #ff4500 0%, #cc3700 100%);
     }
 
     .social-card-twitch .social-icon {
-      background: #9146ff;
+      background: linear-gradient(135deg, #9146ff 0%, #7a3cd6 100%);
     }
 
     .social-card-github .social-icon {
-      background: #333;
+      background: linear-gradient(135deg, #333333 0%, #1a1a1a 100%);
     }
 
     .social-card-behance .social-icon {
-      background: #1769ff;
+      background: linear-gradient(135deg, #1769ff 0%, #0d4fc2 100%);
     }
 
     .social-card-dribbble .social-icon {
-      background: #ea4c89;
+      background: linear-gradient(135deg, #ea4c89 0%, #c73a6e 100%);
     }
 
     .social-card-medium .social-icon {
-      background: #000000;
+      background: linear-gradient(135deg, #000000 0%, #333333 100%);
     }
 
     .social-card-vimeo .social-icon {
-      background: #1ab7ea;
+      background: linear-gradient(135deg, #1ab7ea 0%, #0d8cb3 100%);
     }
 
     .social-card-soundcloud .social-icon {
-      background: #ff3300;
+      background: linear-gradient(135deg, #ff3300 0%, #cc2900 100%);
     }
 
     .social-card-spotify .social-icon {
-      background: #1db954;
+      background: linear-gradient(135deg, #1db954 0%, #169c46 100%);
     }
 
     .social-card-custom .social-icon {
-      background: #666;
+      background: linear-gradient(135deg, #666666 0%, #444444 100%);
     }
 
     @media (max-width: 600px) {
       .social-card mat-card-content {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
       }
 
       .social-icon {
         margin-right: 0;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
       }
 
       .social-info {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         width: 100%;
       }
 
@@ -300,6 +352,19 @@ interface SocialData {
 
       a[mat-raised-button] {
         width: 100%;
+      }
+
+      .profile-header {
+        padding: 20px;
+      }
+
+      .profile-avatar {
+        width: 120px;
+        height: 120px;
+      }
+
+      h1 {
+        font-size: 24px;
       }
     }
   `]
@@ -311,93 +376,44 @@ export class SocialLinksComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    @Inject(PLATFORM_ID) platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    this.isBrowser = isPlatformBrowser(platformId);
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['id']) {
+      if (params['data']) {
         try {
-          // Carregar dados do localStorage usando o ID
-          const socialId = params['id'];
+          const decodedData = decodeURIComponent(params['data']);
 
-          if (this.isBrowser) {
-            const storedData = localStorage.getItem(socialId);
+          try {
+            this.socialData = JSON.parse(decodedData);
 
-            if (storedData) {
-              this.socialData = JSON.parse(storedData);
-
-              // Verificar se há uma foto de perfil e tentar carregá-la do localStorage
-              if (this.socialData?.photo) {
-                // Se a foto já estiver em formato base64, usar diretamente
-                if (this.socialData.photo.startsWith('data:image')) {
-                  console.log('Foto em formato base64 encontrada');
-                } else {
-                  // Tentar extrair o nome do arquivo e carregar do localStorage
-                  const fileName = this.socialData.photo.split('/').pop();
-                  if (fileName) {
-                    const storedImage = localStorage.getItem(`profile_${fileName}`);
-                    if (storedImage) {
-                      console.log('Foto carregada do localStorage');
-                      this.socialData.photo = storedImage;
-                    } else {
-                      console.error('Foto não encontrada no localStorage:', fileName);
-                    }
-                  }
-                }
-              }
-            } else {
-              console.error('Dados sociais não encontrados para o ID:', socialId);
+            // Verificar se os dados são válidos
+            if (!this.socialData || !this.socialData.name || !this.socialData.socials || !Array.isArray(this.socialData.socials)) {
+              this.socialData = {
+                name: 'Redes Sociais',
+                socials: []
+              };
             }
-          } else {
-            console.log('Executando no servidor, não é possível acessar localStorage');
-            // No servidor, podemos definir dados padrão ou deixar vazio
+          } catch (parseError) {
             this.socialData = {
               name: 'Redes Sociais',
               socials: []
             };
           }
-        } catch (error) {
-          console.error('Erro ao carregar dados das redes sociais:', error);
+        } catch (decodeError) {
+          this.socialData = {
+            name: 'Redes Sociais',
+            socials: []
+          };
         }
-      } else if (params['data']) {
-        // Mantendo compatibilidade com o formato anterior
-        try {
-          if (this.isBrowser) {
-            this.socialData = JSON.parse(decodeURIComponent(params['data']));
-
-            // Verificar se há uma foto de perfil e tentar carregá-la do localStorage
-            if (this.socialData?.photo) {
-              // Se a foto já estiver em formato base64, usar diretamente
-              if (this.socialData.photo.startsWith('data:image')) {
-                console.log('Foto em formato base64 encontrada');
-              } else {
-                // Tentar extrair o nome do arquivo e carregar do localStorage
-                const fileName = this.socialData.photo.split('/').pop();
-                if (fileName) {
-                  const storedImage = localStorage.getItem(`profile_${fileName}`);
-                  if (storedImage) {
-                    console.log('Foto carregada do localStorage');
-                    this.socialData.photo = storedImage;
-                  } else {
-                    console.error('Foto não encontrada no localStorage:', fileName);
-                  }
-                }
-              }
-            }
-          } else {
-            console.log('Executando no servidor, não é possível acessar localStorage');
-            // No servidor, podemos definir dados padrão ou deixar vazio
-            this.socialData = {
-              name: 'Redes Sociais',
-              socials: []
-            };
-          }
-        } catch (error) {
-          console.error('Erro ao decodificar dados das redes sociais:', error);
-        }
+      } else {
+        this.socialData = {
+          name: 'Redes Sociais',
+          socials: []
+        };
       }
     });
   }

@@ -1,0 +1,83 @@
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: rgba(0, 0, 0, 0.87);
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        color: rgba(0, 0, 0, 0.6);
+        margin-bottom: 3rem;
+    }
+
+    .actions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+
+        mat-card {
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            }
+
+            mat-card-header {
+                margin-bottom: 1.5rem;
+
+                mat-card-title {
+                    font-size: 1.5rem;
+                    margin-bottom: 0.5rem;
+                }
+
+                mat-card-subtitle {
+                    color: rgba(0, 0, 0, 0.6);
+                }
+            }
+
+            mat-card-content {
+                p {
+                    color: rgba(0, 0, 0, 0.87);
+                    margin-bottom: 1.5rem;
+                }
+            }
+
+            mat-card-actions {
+                display: flex;
+                justify-content: center;
+                padding: 1rem;
+
+                button {
+                    min-width: 200px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .home-container {
+        padding: 1rem;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+        }
+
+        .actions-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+}

@@ -1,0 +1,139 @@
+.checkout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f5f5f5;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+
+    mat-card {
+        width: 100%;
+        max-width: 500px;
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        mat-card-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .price {
+            text-align: center;
+            margin: 2rem 0;
+
+            .currency {
+                font-size: 1.5rem;
+                font-weight: 500;
+                vertical-align: top;
+                margin-right: 0.25rem;
+            }
+
+            .amount {
+                font-size: 3rem;
+                font-weight: 700;
+            }
+
+            .period {
+                font-size: 1rem;
+                color: rgba(0, 0, 0, 0.6);
+                margin-left: 0.25rem;
+            }
+        }
+
+        .features {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+
+            li {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1rem;
+                color: rgba(0, 0, 0, 0.87);
+
+                mat-icon {
+                    color: #4caf50;
+                    margin-right: 0.5rem;
+                }
+            }
+        }
+
+        mat-card-actions {
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+
+            button {
+                min-width: 200px;
+            }
+        }
+
+        mat-card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+    }
+
+    .loading-container,
+    .error-container,
+    .redirecting-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        text-align: center;
+        min-height: 300px;
+
+        mat-icon {
+            font-size: 48px;
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin: 1rem 0;
+            color: rgba(0, 0, 0, 0.87);
+        }
+    }
+
+    .error-container {
+        mat-icon {
+            color: #f44336;
+        }
+
+        button {
+            margin-top: 16px;
+        }
+    }
+
+    .redirecting-container {
+        mat-icon {
+            color: #2196f3;
+        }
+    }
+}
+
+// Animações
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+mat-card {
+    animation: fadeIn 0.3s ease-out;
+}

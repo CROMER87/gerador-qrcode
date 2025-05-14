@@ -1,20 +1,62 @@
 /* filepath: /home/croll/gerador-qrcode/src/styles.css */
 
-
-
 @font-face {
   font-family: 'Code';
   src: url('/assets/fonts/Code.ttf') format('truetype');
 }
 
+html,
 body {
-  font-family: 'Code';
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(135deg, #f6f9fc 0%, #e9f2f9 100%);
 }
 
+body {
+  font-family: 'Code';
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
 .header h1 {
   font-family: 'Code';
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Estilos globais para componentes */
+.mat-mdc-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15) !important;
+}
+
+.mat-mdc-button {
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.mat-mdc-raised-button {
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Suporte para backdrop-filter em diferentes navegadores */
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .glass-effect {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+}
+
+/* Suporte para gradientes em diferentes navegadores */
+@supports (background: linear-gradient(45deg, #000, #fff)) {
+  .gradient-text {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
