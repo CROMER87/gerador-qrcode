@@ -9,17 +9,17 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-    selector: 'app-register',
-    standalone: true,
-    imports: [
-        CommonModule,
-        FormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatCardModule
-    ],
-    template: `
+  selector: 'app-register',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule
+  ],
+  template: `
     <div class="register-container">
       <mat-card>
         <mat-card-header>
@@ -64,7 +64,7 @@ import { AuthService } from '../../services/auth.service';
       </mat-card>
     </div>
   `,
-    styles: [`
+  styles: [`
     .register-container {
       display: flex;
       justify-content: center;
@@ -103,45 +103,40 @@ import { AuthService } from '../../services/auth.service';
   `]
 })
 export class RegisterComponent {
-    name: string = '';
-    email: string = '';
-    password: string = '';
-    confirmPassword: string = '';
-    loading: boolean = false;
-    error: string = '';
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  loading: boolean = false;
+  error: string = '';
 
-    constructor(
-        private authService: AuthService,
-        private router: Router
-    ) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
-    onSubmit(): void {
-        if (!this.name || !this.email || !this.password || !this.confirmPassword) {
-            this.error = 'Por favor, preencha todos os campos';
-            return;
-        }
-
-        if (this.password !== this.confirmPassword) {
-            this.error = 'As senhas não coincidem';
-            return;
-        }
-
-        this.loading = true;
-        this.error = '';
-
-        this.authService.register(this.email, this.password, this.name).subscribe({
-            next: (user) => {
-                this.loading = false;
-                this.router.navigate(['/dashboard']);
-            },
-            error: (err) => {
-                this.loading = false;
-                this.error = 'Erro ao criar conta. Tente novamente.';
-            }
-        });
+  onSubmit(): void {
+    if (!this.email || !this.password || !this.name) {
+      this.error = 'Por favor, preencha todos os campos';
+      return;
     }
 
-    goToLogin(): void {
-        this.router.navigate(['/login']);
-    }
+    this.loading = true;
+    this.error = '';
+
+    this.authService.register(this.email, this.password, this.name).subscribe({
+      next: (user: any) => {
+        this.loading = false;
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err: any) => {
+        this.loading = false;
+        this.error = 'Erro ao criar conta';
+      }
+    });
+  }
+
+  goToLogin(): void {
+    this.router.navigate(['/login']);
+  }
 } 

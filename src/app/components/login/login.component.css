@@ -1,0 +1,62 @@
+.login-container {
+    max-width: 350px;
+    margin: 80px auto;
+    padding: 32px 24px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-container h2 {
+    margin-bottom: 24px;
+    color: #1976d2;
+    font-weight: 600;
+}
+
+.full-width {
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.google-login-btn {
+    width: 100%;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 500;
+    background: #fff;
+}
+
+.google-icon {
+    width: 22px;
+    height: 22px;
+}
+
+.divider {
+    text-align: center;
+    color: #aaa;
+    margin: 16px 0 8px 0;
+    font-size: 15px;
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    display: inline-block;
+    width: 40%;
+    height: 1px;
+    background: #eee;
+    vertical-align: middle;
+    margin: 0 8px;
+}

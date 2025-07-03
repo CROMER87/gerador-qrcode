@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { SubscriptionService, Plan } from '../../services/subscription.service';
 
 @Component({
@@ -22,7 +22,10 @@ import { SubscriptionService, Plan } from '../../services/subscription.service';
 export class SubscriptionPlansComponent implements OnInit {
   plans: Plan[] = [];
 
-  constructor(private subscriptionService: SubscriptionService) { }
+  constructor(
+    private subscriptionService: SubscriptionService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.loadPlans();
@@ -39,6 +42,6 @@ export class SubscriptionPlansComponent implements OnInit {
   }
 
   selectPlan(plan: Plan): void {
-    window.location.href = `/checkout/${plan.id}`;
+    this.router.navigate(['/checkout', plan.id]);
   }
 }

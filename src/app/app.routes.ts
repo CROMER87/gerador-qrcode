@@ -13,6 +13,8 @@ import { PaymentFailureComponent } from './components/payment-failure/payment-fa
 import { PaymentPendingComponent } from './components/payment-pending/payment-pending.component';
 import { QrGeneratorComponent } from './components/qr-generator/qr-generator.component';
 import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -71,6 +73,15 @@ export const routes: Routes = [
   {
     path: 'plans',
     component: SubscriptionPlansComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

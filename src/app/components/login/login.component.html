@@ -1,0 +1,29 @@
+<div class="login-container">
+  <h2>Entrar</h2>
+  
+  <!-- Botão de teste para debug -->
+  <button mat-stroked-button color="accent" (click)="testFirebase()" style="margin-bottom: 10px;">
+    Testar Firebase
+  </button>
+  
+  <button mat-stroked-button color="primary" class="google-login-btn" (click)="loginWithGoogle()" [disabled]="loading">
+    <img src="assets/img/google.svg" alt="Google" class="google-icon" *ngIf="!loading">
+    <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+    {{ loading ? 'Entrando...' : 'Entrar com Google' }}
+  </button>
+  <div class="divider">ou</div>
+  <form (ngSubmit)="login()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" [(ngModel)]="email" name="email" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Senha</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="senha" name="senha" required>
+      <button mat-icon-button matSuffix (click)="$event.preventDefault(); hide = !hide" [attr.aria-label]="hide ? 'Mostrar senha' : 'Esconder senha'" [attr.aria-pressed]="!hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Entrar</button>
+  </form>
+</div> 

@@ -4,127 +4,80 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-    selector: 'app-login',
-    standalone: true,
-    imports: [
-        CommonModule,
-        FormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatCardModule
-    ],
-    template: `
-    <div class="login-container">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Login</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-            <mat-form-field appearance="outline">
-              <mat-label>Email</mat-label>
-              <input matInput [(ngModel)]="email" name="email" type="email" required>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Senha</mat-label>
-              <input matInput [(ngModel)]="password" name="password" type="password" required>
-            </mat-form-field>
-
-            <div class="button-container">
-              <button mat-raised-button color="primary" type="submit" [disabled]="loading">
-                {{ loading ? 'Entrando...' : 'Entrar' }}
-              </button>
-              <button mat-button type="button" (click)="goToRegister()">
-                Criar conta
-              </button>
-            </div>
-
-            <div *ngIf="error" class="error-message">
-              {{ error }}
-            </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  `,
-    styles: [`
-    .login-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background-color: #f5f5f5;
-    }
-
-    mat-card {
-      width: 100%;
-      max-width: 400px;
-      padding: 2rem;
-    }
-
-    mat-card-header {
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
-
-    mat-form-field {
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-
-    .button-container {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 1rem;
-    }
-
-    .error-message {
-      color: #f44336;
-      margin-top: 1rem;
-      text-align: center;
-    }
-  `]
+  selector: 'app-login',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule
+  ],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-    email: string = '';
-    password: string = '';
-    loading: boolean = false;
-    error: string = '';
+  email: string = '';
+  senha: string = '';
+  hide: boolean = true;
+  loading: boolean = false;
 
-    constructor(
-        private authService: AuthService,
-        private router: Router
-    ) { }
+  constructor(private authService: AuthService, private router: Router) {
+    console.log('LoginComponent inicializado');
+    console.log('AuthService:', this.authService);
+  }
 
-    onSubmit(): void {
-        if (!this.email || !this.password) {
-            this.error = 'Por favor, preencha todos os campos';
-            return;
+  login() {
+    // Aqui você pode implementar a lógica de autenticação tradicional
+    alert(`Email: ${this.email}\nSenha: ${this.senha}`);
+  }
+
+  loginWithGoogle() {
+    this.loading = true;
+    console.log('Iniciando login com Google...');
+    console.log('Domínio atual:', window.location.origin);
+
+    this.authService.loginWithGoogle().subscribe({
+      next: (result) => {
+        this.loading = false;
+        console.log('Login com Google realizado com sucesso:', result);
+        alert('Login realizado com sucesso!');
+        this.router.navigate(['/dashboard']);
+      },
+      error: (error) => {
+        this.loading = false;
+        console.error('Erro detalhado no login com Google:', error);
+        console.log('Domínio que causou erro:', window.location.origin);
+
+        let errorMessage = 'Erro ao fazer login com Google.';
+
+        if (error.code === 'auth/popup-closed-by-user') {
+          errorMessage = 'Login cancelado pelo usuário.';
+        } else if (error.code === 'auth/popup-blocked') {
+          errorMessage = 'Popup bloqueado pelo navegador. Permita popups para este site.';
+        } else if (error.code === 'auth/unauthorized-domain') {
+          errorMessage = `Domínio não autorizado: ${window.location.origin}. Verifique a configuração do Firebase.`;
+        } else if (error.code) {
+          errorMessage = `Erro: ${error.code} - ${error.message}`;
         }
 
-        this.loading = true;
-        this.error = '';
+        alert(errorMessage);
+      }
+    });
+  }
 
-        this.authService.login(this.email, this.password).subscribe({
-            next: (user) => {
-                this.loading = false;
-                this.router.navigate(['/dashboard']);
-            },
-            error: (err) => {
-                this.loading = false;
-                this.error = 'Email ou senha inválidos';
-            }
-        });
-    }
-
-    goToRegister(): void {
-        this.router.navigate(['/register']);
-    }
+  testFirebase() {
+    console.log('Testando Firebase...');
+    const currentUser = this.authService.getCurrentUser();
+    console.log('Usuário atual:', currentUser);
+    console.log('Está logado:', this.authService.isLoggedIn());
+  }
 } 

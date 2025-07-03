@@ -1,0 +1,121 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <h1>Meu Perfil</h1>
+    <p>Gerencie suas informações pessoais e assinatura</p>
+  </div>
+
+  <div class="profile-content">
+    <!-- Informações do Usuário -->
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>person</mat-icon>
+          Informações Pessoais
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="user-info">
+          <div class="user-avatar-section">
+            <img *ngIf="currentUser?.photoURL" [src]="currentUser?.photoURL" alt="Foto do usuário" class="user-avatar-large">
+            <mat-icon *ngIf="!currentUser?.photoURL" class="user-avatar-placeholder">account_circle</mat-icon>
+          </div>
+          <div class="user-details">
+            <h3>{{ currentUser?.name }}</h3>
+            <p class="user-email">{{ currentUser?.email }}</p>
+            <p class="user-id">ID: {{ currentUser?.id }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Status da Assinatura -->
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>subscriptions</mat-icon>
+          Status da Assinatura
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="loading" class="loading-section">
+          <mat-spinner diameter="30"></mat-spinner>
+          <p>Carregando dados da assinatura...</p>
+        </div>
+
+        <div *ngIf="!loading" class="subscription-info">
+          <div class="subscription-status">
+            <mat-chip [color]="getSubscriptionStatusColor()" selected>
+              {{ getSubscriptionStatusText() }}
+            </mat-chip>
+          </div>
+
+          <div *ngIf="subscription" class="subscription-details">
+            <div class="detail-item">
+              <span class="label">Plano:</span>
+              <span class="value">{{ subscription.planId | titlecase }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Valor:</span>
+              <span class="value">R$ {{ subscription.amount | number:'1.2-2' }}/mês</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Início:</span>
+              <span class="value">{{ subscription.startDate | date:'dd/MM/yyyy' }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Vencimento:</span>
+              <span class="value">{{ subscription.endDate | date:'dd/MM/yyyy' }}</span>
+            </div>
+          </div>
+
+          <div *ngIf="!subscription" class="no-subscription">
+            <p>Você ainda não possui uma assinatura ativa.</p>
+            <p>Assine um plano para acessar recursos premium!</p>
+          </div>
+
+          <div class="subscription-actions">
+            <button *ngIf="!subscription || subscription.status === 'inactive'" 
+                    mat-raised-button color="primary" 
+                    (click)="upgradeSubscription()">
+              <mat-icon>upgrade</mat-icon>
+              Assinar Plano
+            </button>
+            
+            <button *ngIf="subscription && subscription.status === 'active'" 
+                    mat-stroked-button color="primary" 
+                    (click)="manageSubscription()">
+              <mat-icon>settings</mat-icon>
+              Gerenciar Assinatura
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Estatísticas -->
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>analytics</mat-icon>
+          Estatísticas
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">0</div>
+            <div class="stat-label">QR Codes Criados</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Downloads</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Visualizações</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
-import { AuthService } from './auth.service';
+import { AuthService, AppUser } from './auth.service';
 
 export interface SubscriptionPlan {
   id: string;
@@ -119,7 +119,7 @@ export class SubscriptionService {
   }
 
   getCurrentUserSubscription(): Observable<UserSubscription | null> {
-    const user = this.authService.getCurrentUser();
+    const user = this.authService.getCurrentAppUser();
     if (!user || !user.subscriptionId) {
       return of(null);
     }
@@ -206,7 +206,7 @@ export class SubscriptionService {
   }
 
   getCurrentSubscription(): Observable<Plan | null> {
-    const user = this.authService.getCurrentUser();
+    const user = this.authService.getCurrentAppUser();
     if (!user || !user.subscriptionId) {
       return of(null);
     }
@@ -219,7 +219,7 @@ export class SubscriptionService {
   cancelSubscription(): Observable<{ success: boolean }> {
     // Em produção, isso seria uma chamada à API
     // Por enquanto, simulamos o cancelamento da assinatura
-    const user = this.authService.getCurrentUser();
+    const user = this.authService.getCurrentAppUser();
     if (user && user.subscriptionId) {
       this.authService.updateSubscriptionStatus(user.subscriptionId, 'inactive');
     }

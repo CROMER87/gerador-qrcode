@@ -95,10 +95,11 @@ export class CheckoutComponent implements OnInit {
   proceedToPayment(): void {
     this.redirecting = true;
 
-    // Simulando redirecionamento para gateway de pagamento
+    // Simulando processamento de pagamento
     setTimeout(() => {
-      // Em produção, aqui seria redirecionado para o gateway de pagamento
-      window.location.href = 'https://exemplo.com/pagamento';
+      // Em produção, aqui seria integrado com Mercado Pago ou outro gateway
+      // Por enquanto, simulamos um pagamento bem-sucedido
+      this.router.navigate(['/payment/success']);
     }, 2000);
   }
 }

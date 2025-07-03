@@ -1,56 +1,103 @@
 <div class="checkout-container">
-  <mat-card>
-    <mat-card-content>
-      <!-- Estado de carregamento -->
-      <div class="loading-container" *ngIf="loading">
-        <mat-spinner diameter="50"></mat-spinner>
-        <p>Carregando informações do plano...</p>
-      </div>
+  <!-- Estado de carregamento -->
+  <div class="loading-container" *ngIf="loading">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Carregando informações do plano...</p>
+  </div>
 
-      <!-- Estado de erro -->
-      <div class="error-container" *ngIf="error">
-        <mat-icon color="warn">error</mat-icon>
-        <p>{{ error }}</p>
-        <button mat-raised-button color="primary" (click)="retry()">
-          Tentar novamente
-        </button>
-      </div>
+  <!-- Estado de erro -->
+  <div class="error-container" *ngIf="error">
+    <mat-icon color="warn">error</mat-icon>
+    <p>{{ error }}</p>
+    <button mat-raised-button color="primary" (click)="retry()">
+      Tentar novamente
+    </button>
+  </div>
 
-      <!-- Estado de redirecionamento -->
-      <div class="redirecting-container" *ngIf="redirecting">
-        <mat-spinner diameter="50"></mat-spinner>
-        <p>Redirecionando para o pagamento...</p>
-      </div>
+  <!-- Estado de redirecionamento -->
+  <div class="redirecting-container" *ngIf="redirecting">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Processando pagamento...</p>
+    <p class="redirecting-subtitle">Aguarde, estamos finalizando sua compra</p>
+  </div>
 
-      <!-- Conteúdo principal -->
-      <div class="checkout-container" *ngIf="!loading && !error && !redirecting && plan">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>{{ plan.name }}</mat-card-title>
-          </mat-card-header>
-          
-          <mat-card-content>
+  <!-- Conteúdo principal -->
+  <div class="checkout-content" *ngIf="!loading && !error && !redirecting && plan">
+    <div class="checkout-header">
+      <h1>Finalizar Compra</h1>
+      <p>Confirme os detalhes do seu plano antes de prosseguir</p>
+    </div>
+
+    <div class="checkout-grid">
+      <!-- Resumo do Plano -->
+      <mat-card class="plan-summary">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>subscriptions</mat-icon>
+            Resumo do Plano
+          </mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <div class="plan-info">
+            <h2>{{ plan.name }}</h2>
             <div class="price">
               <span class="currency">R$</span>
               <span class="amount">{{ plan.price.toFixed(2) }}</span>
               <span class="period">/mês</span>
             </div>
+          </div>
 
-            <ul class="features">
+          <div class="features">
+            <h3>Recursos incluídos:</h3>
+            <ul>
               <li *ngFor="let feature of plan.features">
-                <mat-icon>check</mat-icon>
+                <mat-icon>check_circle</mat-icon>
                 {{ feature }}
               </li>
             </ul>
-          </mat-card-content>
+          </div>
+        </mat-card-content>
+      </mat-card>
 
-          <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="proceedToPayment()">
-              Prosseguir para pagamento
-            </button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-    </mat-card-content>
-  </mat-card>
+      <!-- Informações de Pagamento -->
+      <mat-card class="payment-info">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>payment</mat-icon>
+            Informações de Pagamento
+          </mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <div class="payment-summary">
+            <div class="summary-item">
+              <span>Plano selecionado:</span>
+              <span>{{ plan.name }}</span>
+            </div>
+            <div class="summary-item">
+              <span>Valor mensal:</span>
+              <span>R$ {{ plan.price.toFixed(2) }}</span>
+            </div>
+            <div class="summary-item total">
+              <span>Total a pagar:</span>
+              <span>R$ {{ plan.price.toFixed(2) }}</span>
+            </div>
+          </div>
+
+          <div class="payment-notice">
+            <mat-icon>info</mat-icon>
+            <p>O pagamento será processado de forma segura. Você pode cancelar a qualquer momento.</p>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="proceedToPayment()" class="payment-button">
+            <mat-icon>payment</mat-icon>
+            Finalizar Compra
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
 </div>

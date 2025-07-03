@@ -18,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import html2canvas from 'html2canvas';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 interface SocialMedia {
   platform: string;
@@ -48,6 +49,12 @@ interface SocialMedia {
   ],
   template: `
     <div class="qr-container">
+      <div class="qr-back-home">
+        <button mat-stroked-button color="primary" (click)="voltar()">
+          <mat-icon>arrow_back</mat-icon>
+          Voltar para a Home
+        </button>
+      </div>
       <div class="qr-header">
         <h1>Gerador de QR Code</h1>
         <p>Selecione o tipo de QR Code que deseja gerar</p>
@@ -334,6 +341,10 @@ interface SocialMedia {
       font-family: 'Roboto', sans-serif;
     }
 
+    .qr-back-home {
+      margin-bottom: 20px;
+    }
+
     .qr-header {
       text-align: center;
       margin-bottom: 20px;
@@ -596,6 +607,7 @@ interface SocialMedia {
   `]
 })
 export class QrGeneratorComponent {
+
   @ViewChild('qrResult') qrResult!: ElementRef;
   @ViewChild('qrImage') qrImage!: ElementRef;
   @ViewChild('photoInput') photoInput!: ElementRef;
@@ -647,7 +659,7 @@ export class QrGeneratorComponent {
 
   socialLink: string = '';
 
-  constructor(private http: HttpClient, @Inject(PLATFORM_ID) platformId: Object) {
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) platformId: Object, private router: Router) {
     this.isBrowser = isPlatformBrowser(platformId);
     if (this.isBrowser) {
       this.addSocialMedia();
@@ -657,6 +669,11 @@ export class QrGeneratorComponent {
   selectType(type: string) {
     this.selectedType = type;
     this.qrCodeUrl = '';
+  }
+
+  voltar() {
+    console.log('Voltar');
+    this.router.navigate(['/']);
   }
 
   onTypeChange() {

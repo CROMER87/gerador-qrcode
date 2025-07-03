@@ -18,6 +18,31 @@
         Gerador QR Code
       </a>
 
+      <!-- Usuário logado -->
+      <div *ngIf="currentUser" class="user-menu">
+        <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+          <img *ngIf="currentUser.photoURL" [src]="currentUser.photoURL" alt="Foto do usuário" class="user-avatar">
+          <mat-icon *ngIf="!currentUser.photoURL">account_circle</mat-icon>
+          <span class="user-name">{{ currentUser.name }}</span>
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item (click)="goToProfile()">
+            <mat-icon>person</mat-icon>
+            <span>Meu Perfil</span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Sair</span>
+          </button>
+        </mat-menu>
+      </div>
+
+      <!-- Botão de login para usuários não logados -->
+      <button *ngIf="!currentUser" mat-stroked-button color="primary" class="login-link" (click)="goToLogin()">
+        <mat-icon>login</mat-icon>
+        Login
+      </button>
     </nav>
 
     <button mat-icon-button class="menu-button" (click)="toggleMenu()">
@@ -34,5 +59,28 @@
       <mat-icon>qr_code</mat-icon>
       Gerar QR Code
     </a>
+    
+    <!-- Menu mobile para usuário logado -->
+    <div *ngIf="currentUser" class="mobile-user-info">
+      <div class="mobile-user-header">
+        <img *ngIf="currentUser.photoURL" [src]="currentUser.photoURL" alt="Foto do usuário" class="mobile-user-avatar">
+        <mat-icon *ngIf="!currentUser.photoURL">account_circle</mat-icon>
+        <span class="mobile-user-name">{{ currentUser.name }}</span>
+      </div>
+      <button mat-stroked-button color="primary" class="login-link" (click)="closeMenu(); goToProfile()">
+        <mat-icon>person</mat-icon>
+        Meu Perfil
+      </button>
+      <button mat-stroked-button color="primary" class="login-link" (click)="closeMenu(); logout()">
+        <mat-icon>logout</mat-icon>
+        Sair
+      </button>
+    </div>
+
+    <!-- Botão de login mobile para usuários não logados -->
+    <button *ngIf="!currentUser" mat-stroked-button color="primary" class="login-link" (click)="closeMenu(); goToLogin()">
+      <mat-icon>login</mat-icon>
+      Login
+    </button>
   </div>
 </header>

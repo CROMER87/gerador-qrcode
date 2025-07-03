@@ -1,123 +1,234 @@
 .checkout-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-    background-color: #f5f5f5;
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 40px 20px;
+    min-height: 100vh;
+}
 
-    mat-card {
-        width: 100%;
-        max-width: 500px;
-        padding: 24px;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.checkout-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
 
-        mat-card-header {
-            margin-bottom: 1.5rem;
-        }
+.checkout-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+}
 
-        .price {
-            text-align: center;
-            margin: 2rem 0;
+.checkout-header p {
+    font-size: 1.1rem;
+    color: #666;
+}
 
-            .currency {
-                font-size: 1.5rem;
-                font-weight: 500;
-                vertical-align: top;
-                margin-right: 0.25rem;
-            }
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+}
 
-            .amount {
-                font-size: 3rem;
-                font-weight: 700;
-            }
+/* Estados de carregamento e erro */
+.loading-container,
+.error-container,
+.redirecting-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    text-align: center;
+}
 
-            .period {
-                font-size: 1rem;
-                color: rgba(0, 0, 0, 0.6);
-                margin-left: 0.25rem;
-            }
-        }
+.loading-container p,
+.error-container p,
+.redirecting-container p {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: #666;
+}
 
-        .features {
-            list-style: none;
-            padding: 0;
-            margin: 2rem 0;
+.redirecting-subtitle {
+    font-size: 0.9rem !important;
+    color: #999 !important;
+    margin-top: 10px !important;
+}
 
-            li {
-                display: flex;
-                align-items: center;
-                margin-bottom: 1rem;
-                color: rgba(0, 0, 0, 0.87);
+.error-container mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 20px;
+}
 
-                mat-icon {
-                    color: #4caf50;
-                    margin-right: 0.5rem;
-                }
-            }
-        }
+/* Cards do checkout */
+.plan-summary,
+.payment-info {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
-        mat-card-actions {
-            display: flex;
-            justify-content: center;
-            padding: 1rem;
+.plan-summary mat-card-header,
+.payment-info mat-card-header {
+    margin-bottom: 20px;
+}
 
-            button {
-                min-width: 200px;
-            }
-        }
+.plan-summary mat-card-title,
+.payment-info mat-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
 
-        mat-card-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
+/* Informações do plano */
+.plan-info {
+    margin-bottom: 30px;
+}
+
+.plan-info h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.price {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.currency {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1976d2;
+}
+
+.period {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Lista de recursos */
+.features h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.features ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: #555;
+}
+
+.features mat-icon {
+    color: #4caf50;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Resumo do pagamento */
+.payment-summary {
+    margin-bottom: 30px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.summary-item.total {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #1976d2;
+    border-top: 2px solid #1976d2;
+    margin-top: 10px;
+    padding-top: 15px;
+}
+
+/* Aviso de pagamento */
+.payment-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.payment-notice mat-icon {
+    color: #1976d2;
+    margin-top: 2px;
+}
+
+.payment-notice p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* Botão de pagamento */
+.payment-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.payment-button mat-icon {
+    margin-right: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .checkout-container {
+        padding: 20px 15px;
     }
 
-    .loading-container,
-    .error-container,
-    .redirecting-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-        text-align: center;
-        min-height: 300px;
-
-        mat-icon {
-            font-size: 48px;
-            width: 48px;
-            height: 48px;
-            margin-bottom: 1rem;
-        }
-
-        p {
-            margin: 1rem 0;
-            color: rgba(0, 0, 0, 0.87);
-        }
+    .checkout-header h1 {
+        font-size: 2rem;
     }
 
-    .error-container {
-        mat-icon {
-            color: #f44336;
-        }
-
-        button {
-            margin-top: 16px;
-        }
+    .checkout-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 
-    .redirecting-container {
-        mat-icon {
-            color: #2196f3;
-        }
+    .plan-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .amount {
+        font-size: 2rem;
     }
 }
 
